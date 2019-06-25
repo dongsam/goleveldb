@@ -327,7 +327,7 @@ func (db *DB) Write(batch *Batch, wo *opt.WriteOptions) error {
 func (db *DB) putRec(kt keyType, key, value []byte, wo *opt.WriteOptions) error {
 	//logStructure := PutRec{kt: kt, key: key, value: value, wo: wo}
 	//logStr, _ := json.Marshal(logStructure)
-	db.log("|",kt,"|",key,"|",value,"|",wo.NoWriteMerge,"|",wo.Sync)
+	db.log("|",kt,"|",key,"|",value,"|",wo.GetNoWriteMerge(),"|",wo.GetSync())
 	if err := db.ok(); err != nil {
 		return err
 	}
