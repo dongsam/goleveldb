@@ -317,17 +317,17 @@ func (db *DB) Write(batch *Batch, wo *opt.WriteOptions) error {
 	return db.writeLocked(batch, nil, merge, sync)
 }
 
-type PutRec struct {
-	kt keyType
-	key []byte
-	value []byte
-	wo *opt.WriteOptions
-}
+//type PutRec struct {
+//	kt keyType
+//	key []byte
+//	value []byte
+//	wo *opt.WriteOptions
+//}
 
 func (db *DB) putRec(kt keyType, key, value []byte, wo *opt.WriteOptions) error {
-	logStructure := PutRec{kt: kt, key: key, value: value, wo: wo}
+	//logStructure := PutRec{kt: kt, key: key, value: value, wo: wo}
 	//logStr, _ := json.Marshal(logStructure)
-	db.log("|", logStructure)
+	db.log("|",kt,"|",key,"|",value,"|",wo.NoWriteMerge,"|",wo.Sync)
 	if err := db.ok(); err != nil {
 		return err
 	}
