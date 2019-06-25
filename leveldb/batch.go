@@ -85,6 +85,7 @@ func (b *Batch) grow(n int) {
 	}
 }
 
+// TODO: for application.db of cosmos-sdk
 func (b *Batch) appendRec(kt keyType, key, value []byte) {
 	n := 1 + binary.MaxVarintLen32 + len(key)
 	if kt == keyTypeVal {
