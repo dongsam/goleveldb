@@ -318,6 +318,7 @@ func (db *DB) Write(batch *Batch, wo *opt.WriteOptions) error {
 }
 
 func (db *DB) putRec(kt keyType, key, value []byte, wo *opt.WriteOptions) error {
+	db.log("|", kt, key, value, wo)
 	if err := db.ok(); err != nil {
 		return err
 	}
