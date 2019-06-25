@@ -7,7 +7,6 @@
 package leveldb
 
 import (
-	"encoding/json"
 	"sync/atomic"
 	"time"
 
@@ -327,8 +326,8 @@ type PutRec struct {
 
 func (db *DB) putRec(kt keyType, key, value []byte, wo *opt.WriteOptions) error {
 	logStructure := PutRec{kt: kt, key: key, value: value, wo: wo}
-	logStr, _ := json.Marshal(logStructure)
-	db.log("|", logStr)
+	//logStr, _ := json.Marshal(logStructure)
+	db.log("|", logStructure)
 	if err := db.ok(); err != nil {
 		return err
 	}
