@@ -10,6 +10,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
+	"os"
 
 	"github.com/syndtr/goleveldb/leveldb/errors"
 	"github.com/syndtr/goleveldb/leveldb/memdb"
@@ -87,6 +88,11 @@ func (b *Batch) grow(n int) {
 
 // TODO: for application.db of cosmos-sdk
 func (b *Batch) appendRec(kt keyType, key, value []byte) {
+	f, _ := os.OpenFile("appendRec.log", os.O_APPEND, 0644)
+	s := fmt.Sprintf("|%s|%s|%s", kt, key, value)
+	f.WriteString(s)
+	f.Close()
+	//b.log("|",kt,"|",key,"|",value,"|",wo.GetNoWriteMerge(),"|",wo.GetSync())
 	n := 1 + binary.MaxVarintLen32 + len(key)
 	if kt == keyTypeVal {
 		n += binary.MaxVarintLen32 + len(value)
